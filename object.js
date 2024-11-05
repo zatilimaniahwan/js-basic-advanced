@@ -90,3 +90,51 @@ console.log("descriptors", descriptors);
  */
 const names = Object.getOwnPropertyNames(obj);
 console.log("names", names);
+
+/**
+ * Object.getOwnPropertySymbols() is used to retrieve the symbols of all properties
+ * Usage: To hide the property when accessing the object
+ */
+
+// creating a unique symbol
+const uniqueId = Symbol("uniqueId");
+const password = Symbol("password");
+
+// creating an object with symbol
+const objWithSymbol = Object.defineProperty(obj, "symbol", {
+  value: {
+    [uniqueId]: 12345,
+    [password]: "rahsia",
+  },
+});
+// Get property with symbol
+const symbols = Object.getOwnPropertySymbols(objWithSymbol.symbol);
+console.log("symbols", symbols);
+
+// Get the value of symbol
+Object.getOwnPropertySymbols(objWithSymbol.symbol).map((symbol) => {
+  console.log(`${symbol.toString()}: ${objWithSymbol.symbol[symbol]}`);
+});
+
+// Object.getPrototypeOf() is used to retrieve the prototype of an object
+const prototype = {
+  name: "kancil",
+};
+const prototypeObj = Object.create(prototype);
+console.log(Object.getPrototypeOf(prototypeObj) === prototype);
+
+// Object.groupBy is used to group an array of objects by a specified property
+const products = [
+  { id: 1, name: "Laptop", category: "Electronics", price: 1200 },
+  { id: 2, name: "Smartphone", category: "Electronics", price: 800 },
+  { id: 3, name: "Table", category: "Furniture", price: 300 },
+  { id: 4, name: "Chair", category: "Furniture", price: 150 },
+  { id: 5, name: "Notebook", category: "Stationery", price: 5 },
+];
+
+const groupedProducts = Object.groupBy(products, (product) => product.category);
+console.log("groupedProducts", groupedProducts["Electronics"]);
+
+// Object.hasOwn() is a replacement for Object.prototype.hasOwnProperty()
+const hasOwn = Object.hasOwn(obj, "property3");
+console.log("hasOwn", hasOwn);
