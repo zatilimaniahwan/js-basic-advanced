@@ -123,6 +123,13 @@ const prototype = {
 const prototypeObj = Object.create(prototype);
 console.log(Object.getPrototypeOf(prototypeObj) === prototype);
 
+// Object.setPrototypeOf() is used to set the prototype of an object
+const setProtoObj = {};
+const setPrototypeOf = Object.setPrototypeOf(setProtoObj, {
+  name: "honda",
+});
+console.log("setPrototypeOf", setPrototypeOf.name);
+
 // Object.groupBy is used to group an array of objects by a specified property
 const products = [
   { id: 1, name: "Laptop", category: "Electronics", price: 1200 },
@@ -131,10 +138,46 @@ const products = [
   { id: 4, name: "Chair", category: "Furniture", price: 150 },
   { id: 5, name: "Notebook", category: "Stationery", price: 5 },
 ];
-
 const groupedProducts = Object.groupBy(products, (product) => product.category);
 console.log("groupedProducts", groupedProducts["Electronics"]);
 
 // Object.hasOwn() is a replacement for Object.prototype.hasOwnProperty()
 const hasOwn = Object.hasOwn(obj, "property3");
 console.log("hasOwn", hasOwn);
+
+// Object.is() is used to compare two values whether they are equal or not
+const isFalse = Object.is(5, "5");
+console.log("isFalse", isFalse); // false
+const isTrue = Object.is(5, 5);
+console.log("isTrue", isTrue); // true
+
+// Object.isExtensible() is used to check whether an object is extensible or not
+// Prevent the object being extensible
+/**
+ * used when u want to prevent the addition of new properties
+ * but u can modify and delete the values of existing properties
+ */
+Object.preventExtensions(obj);
+console.log("isExtensible", Object.isExtensible(obj));
+
+// Object.isFrozen() is used to check whether an object is frozen or not
+// used when you want to make the object immutable
+Object.freeze(obj);
+console.log("isFrozen", Object.isFrozen(obj));
+
+// Object.isSealed() is used to check whether an object is sealed or not
+/**
+ * used when u want to prevent the addition of new properties
+ * and prevent deletion of existing properties
+ * but u can modify the existing properties
+ * */
+Object.seal(obj);
+console.log("isSealed", Object.isSealed(obj));
+
+// Object.keys() is used to retrieve the keys of an object
+const keys = Object.keys(obj);
+console.log("keys", keys);
+
+// Object.values() is used to retrieve the values of an object
+const values = Object.values(obj);
+console.log("values", values);
